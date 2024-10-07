@@ -1,4 +1,4 @@
-# YouTube Comment Analyzer and Reply Generator
+# RECO - YouTube Comment Analyzer and Reply Generator
 
 This project is a web application that allows users to analyze comments on YouTube videos for sentiment and generate replies using advanced AI models. The application consists of a Flask server backend and a React frontend.
 
