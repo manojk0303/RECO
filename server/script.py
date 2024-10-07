@@ -72,7 +72,7 @@ def generate_reply():
     comment = data.get('comment')
 
     # Configure the Gemini API with your API key
-    genai.configure(api_key="AIzaSyDPBpfrQsK-EJtwdP7PrfPmnkLW0zrSMAE")
+    genai.configure(api_key="YPUR_GEMINI_API_KEY")
 
     # Set up the generation configuration
     generation_config = {
