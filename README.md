@@ -130,3 +130,6 @@ cd RECO
 
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue for any improvements or features you'd like to suggest.
+
+## License
+This project is open-source and available under the MIT License.
