@@ -1,18 +1,19 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from googleapiclient.discovery import build
-from pyngrok import ngrok
+# from pyngrok import ngrok
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import torch.nn.functional as F
 from datetime import datetime
-print(flask.__version__)
-
+# print(flask.__version__)
+import os 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Replace this with your own API key from Google Cloud
-YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY'
+# YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY'
+YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 
 # YouTube API service
 youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
@@ -72,7 +73,10 @@ def generate_reply():
     comment = data.get('comment')
 
     # Configure the Gemini API with your API key
-    genai.configure(api_key="AIzaSyDPBpfrQsK-EJtwdP7PrfPmnkLW0zrSMAE")
+    GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+    if not GEMINI_API_KEY:
+        return jsonify({"error": "Gemini API key not found"}), 500
+    genai.configure(api_key=GEMINI_API_KEY)
 
     # Set up the generation configuration
     generation_config = {
@@ -158,6 +162,6 @@ def analyze_video():
     return jsonify(response)
 
 if __name__ == '__main__':
-    public_url = ngrok.connect(5000)
-    print(f" * Ngrok Tunnel URL: {public_url}")
-    app.run(host='0.0.0.0', port=5000)
+    # public_url = ngrok.connect(5000)
+    # print(f" * Ngrok Tunnel URL: {public_url}")
+    app.run(host='0.0.0.0', port=5000,debug=True)
