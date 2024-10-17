@@ -14,6 +14,9 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 # Replace this with your own API key from Google Cloud
 # YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY'
 YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
+@app.route('/')
+def hello_world():
+    return "Hello World"
 
 # YouTube API service
 youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
